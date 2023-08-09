@@ -1,0 +1,27 @@
+.profile__edit-img {
+    border-radius: 50%;
+    grid-area: img;
+    justify-self: start;
+    align-self: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile__edit-img:hover .profile__img{
+    opacity: .2;
+}
+
+.profile__edit-img:hover::after {
+    background-image: url("../../../images/edit.svg");
+    background-size: 26px 26px;
+    background-position: center center;
+    width: 26px;
+    height: 26px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    content: "";
+    position: absolute;
+}
+

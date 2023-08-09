@@ -1,0 +1,6 @@
+.popup__indicator {
+    margin: 60px auto 0;
+    width: 120px;
+    height: 120px;
+    background-image: url('../../../images/success.svg');
+}
