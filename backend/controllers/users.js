@@ -105,7 +105,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      const userAgent = req.get('User-Agent');
+      const userAgent = req.headers['user-agent'];
       const regEx = /Chrome\/\d+/;
       const chromeVersion = userAgent.match(regEx).toString().replace('Chrome/', '');
       if (chromeVersion > 80) {
