@@ -30,7 +30,7 @@ function Register({onSubmit}) {
                     placeholder="Email" name="email" id="email" onChange={handleEmailChange} value={registerValue['email']}/>
                     <span className="register__input-error"></span>
                     
-                    <input className="register__input register__input_value_password" type="text" required
+                    <input className="register__input register__input_value_password" type="password" required
                     placeholder="Пароль" name="password" id="password" onChange={handlePasswordChange} value={registerValue['password']}/>
                     <span className="register__input-error"></span>
                     
