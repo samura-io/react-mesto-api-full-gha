@@ -11,8 +11,8 @@ const { PORT = 3000 } = process.env;
 
 const corsOptions = {
   origin: ['http://localhost:3000',
-    'https://samura.io.nomoreparties.co/',
-    'http://samura.io.nomoreparties.co/'],
+    'https://samura.io.nomoreparties.co',
+    'http://samura.io.nomoreparties.co'],
   credentials: true,
 };
 
