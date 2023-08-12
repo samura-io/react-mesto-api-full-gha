@@ -3,8 +3,8 @@
 
 ### Ссылки:
 IP 158.160.34.243
-Frontend samura.io.nomoreparties.co
-Backend api.samura.io.nomoreparties.co
+Frontend hhtp://samura.io.nomoreparties.co
+Backend hhtp://api.samura.io.nomoreparties.co
 
 ### Описание
 "react-mesto-api-full-gha" - это проект, созданный с целью показать пример веб-приложения, способного загружать, просматривать и оценивать фотографии пользователей. Он объединяет в себе фронтенд, разработанный с использованием библиотеки React, и бэкенд, предоставляющий API для работы с данными пользователей и фотографий.
