@@ -1,8 +1,8 @@
 import React from "react";
 
 function Card({card, onCardClick, userId, onCardLike, onCardDelete}){
-    const isOwn = card.owner._id === userId;
-    const isLiked = card.likes.some((i)=> i._id === userId);
+    const isOwn = card.owner === userId;
+    const isLiked = card.likes.some((i)=> i === userId);
     const cardLikeButton = (`card__like-button ${isLiked && 'card__like-button_active'}`);
 
     const handleClick = () => {

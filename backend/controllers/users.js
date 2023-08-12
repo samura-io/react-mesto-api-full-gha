@@ -2,10 +2,13 @@ const validationError = require('mongoose').Error.ValidationError;
 const castError = require('mongoose').Error.CastError;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const BadRequest = require('../errors/BadRequest');
 const NotFound = require('../errors/NotFound');
 const Conflict = require('../errors/Conflict');
 const userModel = require('../models/user');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   userModel.find({})
@@ -70,7 +73,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
   userModel.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then(((user) => res.send({ data: user })))
+    .then(((user) => res.send(user)))
     .catch((err) => {
       if (err instanceof validationError) {
         next(new BadRequest('Переданы некорректные данные при обновлении профиля'));
@@ -83,7 +86,7 @@ module.exports.updateUser = (req, res, next) => {
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   userModel.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then(((user) => res.send({ data: user })))
+    .then(((user) => res.send(user)))
     .catch((err) => {
       if (err instanceof validationError) {
         next(new BadRequest('Переданы некорректные данные при обновлении аватвра'));
@@ -99,13 +102,14 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'cde3828a2fde0b2bd42cb6108bcc8a869c8ba947ace460eccabffc67a229604d',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        sameSite: true,
+        sameSite: 'None',
+        secure: true,
       });
       res.send({ jwt: token })
         .end();
@@ -122,5 +126,9 @@ module.exports.getUserInfo = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
+  res.clearCookie('jwt', {
+    sameSite: 'none',
+    secure: true,
+  })
+    .send({ message: 'Выход' });
 };

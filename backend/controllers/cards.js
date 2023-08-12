@@ -14,7 +14,7 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   cardModel.create({ name, link, owner: req.user })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err instanceof validationError) {
         next(new BadRequest('Переданы некорректные данные при создании карточки'));
@@ -58,7 +58,7 @@ module.exports.likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
       } else {
         next(new NotFound(`Передан несуществующий id: ${req.params.cardId} карточки`));
       }
@@ -76,7 +76,7 @@ module.exports.unlikeCard = (req, res, next) => {
   cardModel.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
       } else {
         next(new NotFound(`Передан несуществующий id: ${req.params.cardId} карточки`));
       }

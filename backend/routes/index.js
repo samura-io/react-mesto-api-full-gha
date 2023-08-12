@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const cookieParser = require('cookie-parser');
 const usersRouter = require('./users');
 const cardsRouter = require('./cards');
 const NotFound = require('../errors/NotFound');
@@ -15,8 +14,7 @@ const {
 
 router.post('/signin', validationEmailAndPassword, login);
 router.post('/signup', validationEmailAndPassword, createUser);
-router.post('/signout', logout);
-router.use(cookieParser());
+router.get('/signout', logout);
 router.use('/users', usersRouter);
 router.use('/cards', cardsRouter);
 router.use('*', (req, res, next) => {

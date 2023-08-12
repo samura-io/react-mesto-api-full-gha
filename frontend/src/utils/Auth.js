@@ -1,6 +1,7 @@
 class Auth {
     constructor(){
-        this._baseUrl = 'https://auth.nomoreparties.co';
+        this._baseUrl = 'https://api.samura.io.nomoreparties.co';
+        // this._baseUrl = 'https://api.samura.io.nomoreparties.co';
         this._headers = {
             'Content-Type': 'application/json'
         }
@@ -29,6 +30,7 @@ class Auth {
         return fetch(`${this._baseUrl}/signin`, {
             method: 'POST',
             headers: this._headers,
+            credentials: 'include',
             body: JSON.stringify({
                 "password": password,
                 "email": email,
@@ -36,10 +38,17 @@ class Auth {
         }).then(this._checkResponse);
     }
 
-    checkToken(token) {
-        return fetch(`${this._baseUrl}/users/me`, {
+    logout() {
+        return fetch(`${this._baseUrl}/signout`, {
             method: 'GET',
-            headers: {...this._headers, "Authorization" : `Bearer ${token}`}
+            credentials: 'include',
+        }).then(this._checkResponse);
+    }
+
+    checkAuth() {
+        return fetch(`${this._baseUrl}/users/me`, {
+            credentials: 'include',
+            method: 'GET',
         }).then(this._checkResponse);
     }
 }
