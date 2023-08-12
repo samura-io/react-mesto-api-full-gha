@@ -7,6 +7,7 @@ const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const INTERNAL_SERVER_ERROR = 500;
+
 const { PORT = 3000 } = process.env;
 
 const corsOptions = {
