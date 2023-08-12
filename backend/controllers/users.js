@@ -105,13 +105,24 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: 'Strict',
-        // sameSite: 'None',
-        // secure: true,
-      });
+      const userAgent = req.get('User-Agent');
+      const regEx = /Chrome\/\d+/;
+      const chromeVersion = userAgent.match(regEx).toString().replace('Chrome/', '');
+      if (chromeVersion > 80) {
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: 'None',
+          secure: true,
+        });
+      } else {
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: 'Strict',
+        });
+      }
+
       res.send({ jwt: token })
         .end();
     })
