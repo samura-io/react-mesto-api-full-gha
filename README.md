@@ -1,3 +1,4 @@
+[![Tests 15 sprint](https://github.com/samura-io/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/samura-io/react-mesto-api-full-gha/actions/workflows/tests.yml)
 ## Проект "react-mesto-api-full-gha"
 Приветствую! Этот проект представляет собой полнофункциональное веб-приложение для обмена фотографиями, разработанное с использованием React и интегрированное с API.
 
