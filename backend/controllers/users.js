@@ -107,8 +107,7 @@ module.exports.login = (req, res, next) => {
       );
       const userAgent = req.get('User-Agent');
       const regEx = /Chrome\/\d+/;
-      const chromeVersion = userAgent.match(regEx).toString().replace('Chrome/', '');
-      if (chromeVersion && chromeVersion > 80) {
+      if (userAgent.match(regEx) && userAgent.match(regEx).toString().replace('Chrome/', '') > 80) {
         res.cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
