@@ -30,7 +30,7 @@ function Login({onSubmit}) {
                     placeholder="Email" name="email" id="email" onChange={handleEmailChange} value={loginValue['email']}/>
                     <span className="login__input-error"></span>
                     
-                    <input className="login__input login__input_value_password" type="text" required 
+                    <input className="login__input login__input_value_password" type="password" required 
                     placeholder="Пароль" name="password" id="password"  onChange={handlePasswordChange} value={loginValue['password']}/>
                     <span className="login__input-error"></span>
                     
