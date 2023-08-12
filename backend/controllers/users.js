@@ -123,7 +123,7 @@ module.exports.login = (req, res, next) => {
         });
       }
 
-      res.send({ jwt: token })
+      res.send({ jwt: token, userAgent: req.get('User-Agent') })
         .end();
     })
     .catch((err) => {
